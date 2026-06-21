@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adnan Buyung Nasution — Portfolio</title>
+<meta name="description" content="Portfolio Adnan Buyung Nasution — Full-Stack Engineer, sistem reliability, data infrastructure, dan AI/LLM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0c1726;
+    --bg-panel:#13243a;
+    --bg-panel-alt:#172b45;
+    --line:#27435f;
+    --line-soft:rgba(94,200,224,.14);
+    --cyan:#5ec8e0;
+    --cyan-dim:#3a8aa3;
+    --amber:#e8a33d;
+    --green:#6fcf97;
+    --slate:#8fa3b8;
+    --text:#eaf1f7;
+    --text-dim:#9fb3c8;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-deep);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--cyan);color:#08121f;}
+
+  /* blueprint grid backdrop */
+  .grid-overlay{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:42px 42px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 75%);
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 75%);
+    opacity:.6;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  section{position:relative;z-index:1;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{
+    content:"";width:7px;height:7px;border-radius:50%;
+    background:var(--cyan);box-shadow:0 0 0 3px var(--line-soft);
+  }
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(12,23,38,.78);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw);margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:14px;}
+  .brand .mark{
+    width:30px;height:30px;border:1px solid var(--cyan);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:11px;color:var(--cyan);
+    background:linear-gradient(160deg,var(--bg-panel-alt),var(--bg-panel));
+    flex:none;
+  }
+  .brand b{font-weight:600;letter-spacing:.02em;}
+  .navlinks{display:flex;gap:22px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;color:var(--text-dim);}
+  .navlinks a{transition:color .15s ease;white-space:nowrap;}
+  .navlinks a:hover{color:var(--cyan);}
+  @media(max-width:680px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:148px 0 90px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{
+    font-size:clamp(40px,6vw,68px);
+    line-height:1.04;
+    margin:18px 0 20px;
+  }
+  .hero h1 span{color:var(--cyan);}
+  .hero p.lead{
+    font-size:17px;color:var(--text-dim);max-width:540px;margin-bottom:26px;
+  }
+  .readout{
+    font-family:var(--font-mono);font-size:12.5px;color:var(--slate);
+    border:1px solid var(--line);background:rgba(19,36,58,.6);
+    border-radius:8px;padding:12px 16px;display:inline-flex;flex-wrap:wrap;gap:10px 18px;
+    margin-bottom:30px;
+  }
+  .readout b{color:var(--text);font-weight:500;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:.03em;
+    padding:12px 22px;border-radius:6px;border:1px solid var(--line);
+    transition:all .18s ease;
+  }
+  .btn.primary{background:var(--cyan);color:#08121f;border-color:var(--cyan);font-weight:600;}
+  .btn.primary:hover{background:#7fd6ea;}
+  .btn.ghost{color:var(--text);}
+  .btn.ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  /* hero schematic svg */
+  .schematic{width:100%;height:auto;}
+  .schematic .node{fill:var(--bg-panel-alt);stroke:var(--cyan-dim);stroke-width:1.4;}
+  .schematic .node.core{fill:var(--bg-panel-alt);stroke:var(--cyan);stroke-width:1.8;}
+  .schematic .edge{stroke:var(--line);stroke-width:1.2;}
+  .schematic text{font-family:var(--font-mono);fill:var(--text-dim);font-size:9px;letter-spacing:.04em;}
+  .schematic .core-label{fill:var(--cyan);font-size:9.5px;}
+  .pulse{animation:pulse 2.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  @media(prefers-reduced-motion:reduce){.pulse{animation:none;}}
+
+  /* ---------- section heads ---------- */
+  .sec-head{margin-bottom:38px;}
+  .sec-head h2{font-size:clamp(26px,3.4vw,34px);margin-top:10px;}
+  .sec-head p{color:var(--text-dim);max-width:600px;margin-top:10px;font-size:15px;}
+
+  /* ---------- stats ---------- */
+  .stats{padding:30px 0 70px;}
+  .stat-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:var(--bg-panel);
+  }
+  .stat{padding:26px 22px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:var(--font-display);font-size:34px;color:var(--cyan);font-weight:700;}
+  .stat .lbl{font-family:var(--font-mono);font-size:11.5px;color:var(--text-dim);margin-top:6px;letter-spacing:.02em;}
+  @media(max-width:760px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--line);}
+    .stat:nth-child(2n){border-right:none;}
+  }
+
+  /* ---------- featured ---------- */
+  .featured{padding:30px 0 80px;}
+  .feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media(max-width:840px){.feat-grid{grid-template-columns:1fr;}}
+  .card{
+    border:1px solid var(--line);border-radius:10px;background:var(--bg-panel);
+    padding:26px;display:flex;flex-direction:column;gap:14px;
+    transition:border-color .2s ease, transform .2s ease;
+    opacity:0;transform:translateY(14px);
+  }
+  .card.visible{opacity:1;transform:translateY(0);}
+  .card:hover{border-color:var(--cyan-dim);}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .tag{font-family:var(--font-mono);font-size:11.5px;color:var(--cyan);letter-spacing:.04em;border:1px solid var(--line-soft);padding:3px 8px;border-radius:4px;}
+  .status{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);}
+  .dot{width:7px;height:7px;border-radius:50%;flex:none;}
+  .dot.live{background:var(--green);box-shadow:0 0 0 3px rgba(111,207,151,.18);}
+  .dot.dev{background:var(--amber);box-shadow:0 0 0 3px rgba(232,163,61,.18);}
+  .dot.doc{background:var(--slate);box-shadow:0 0 0 3px rgba(143,163,184,.18);}
+  .card h3{font-size:19.5px;color:var(--text);}
+  .card p{color:var(--text-dim);font-size:14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:6px;}
+  .chip{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);background:var(--bg-panel-alt);border:1px solid var(--line);padding:4px 9px;border-radius:20px;}
+
+  /* ---------- registry ---------- */
+  .registry{padding:30px 0 80px;}
+  .filters{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+  .filter-btn{
+    font-family:var(--font-mono);font-size:12px;color:var(--text-dim);
+    border:1px solid var(--line);background:transparent;padding:8px 16px;border-radius:20px;
+    cursor:pointer;transition:all .15s ease;
+  }
+  .filter-btn.active,.filter-btn:hover{color:var(--cyan);border-color:var(--cyan-dim);}
+  .reg-table{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg-panel);}
+  .reg-row{
+    display:grid;grid-template-columns:90px 1fr 2fr 110px;gap:16px;
+    padding:16px 22px;border-bottom:1px solid var(--line);align-items:center;
+    opacity:0;transform:translateY(10px);transition:opacity .4s ease, transform .4s ease;
+  }
+  .reg-row.visible{opacity:1;transform:translateY(0);}
+  .reg-row:last-child{border-bottom:none;}
+  .reg-row:hover{background:var(--bg-panel-alt);}
+  .reg-row .tagnum{font-family:var(--font-mono);font-size:12px;color:var(--cyan);}
+  .reg-row .name{font-family:var(--font-display);font-size:15px;font-weight:600;}
+  .reg-row .desc{font-size:13px;color:var(--text-dim);}
+  .reg-row .statuscol{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:6px;justify-content:flex-end;}
+  .reg-row.hidden-row{display:none;}
+  @media(max-width:760px){
+    .reg-row{grid-template-columns:1fr;gap:6px;padding:16px 18px;}
+    .reg-row .statuscol{justify-content:flex-start;}
+  }
+
+  /* ---------- stack ---------- */
+  .stack{padding:30px 0 80px;}
+  .stack-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  @media(max-width:760px){.stack-groups{grid-template-columns:1fr;}}
+  .stack-group{border:1px solid var(--line);border-radius:10px;padding:22px 24px;background:var(--bg-panel);}
+  .stack-group h4{font-family:var(--font-mono);font-size:12px;color:var(--amber);letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px;}
+  .stack-group .chips{margin-top:0;}
+
+  /* ---------- about ---------- */
+  .about{padding:30px 0 80px;}
+  .about-box{
+    border:1px solid var(--line);border-radius:10px;background:var(--bg-panel);
+    padding:38px;display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;
+  }
+  @media(max-width:840px){.about-box{grid-template-columns:1fr;padding:28px;}}
+  .about-box p{color:var(--text-dim);font-size:14.5px;margin-bottom:14px;}
+  .about-box p:last-child{margin-bottom:0;}
+  .about-meta{font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);display:flex;flex-direction:column;gap:10px;}
+  .about-meta .row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:9px;}
+  .about-meta .row b{color:var(--text);font-weight:500;}
+
+  /* ---------- contact ---------- */
+  .contact{padding:30px 0 110px;}
+  .contact-box{
+    border:1px solid var(--line);border-radius:10px;background:linear-gradient(160deg,var(--bg-panel-alt),var(--bg-panel));
+    padding:48px;text-align:center;
+  }
+  .contact-box h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:14px;}
+  .contact-box p{color:var(--text-dim);max-width:480px;margin:0 auto 28px;}
+  .contact-grid{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .contact-pill{
+    font-family:var(--font-mono);font-size:13px;border:1px solid var(--line);
+    padding:11px 20px;border-radius:6px;color:var(--text-dim);transition:all .15s ease;
+  }
+  .contact-pill:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  footer{
+    border-top:1px solid var(--line);padding:26px 0;position:relative;z-index:1;
+  }
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--font-mono);font-size:11.5px;color:var(--slate);}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){
+    .reveal,.card,.reg-row{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<header>
+  <nav class="nav">
+    <div class="brand"><span class="mark">ABN</span><b>Adnan Buyung Nasution</b></div>
+    <div class="navlinks">
+      <a href="#featured">Sistem Pilihan</a>
+      <a href="#registry">Registry</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">Tentang</a>
+      <a href="#contact">Kontak</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero wrap hero-grid">
+    <div>
+      <span class="eyebrow">Full-Stack Engineer // Reliability &amp; Data Systems</span>
+      <h1>Adnan Buyung<br><span>Nasution.</span></h1>
+      <p class="lead">Saya membangun sistem internal untuk manajemen equipment, reliability, dan data governance di lingkungan refinery — dari dashboard KPI, knowledge graph, sampai asisten AI yang membaca data SAP. Sebagian besar berjalan di produksi, sebagian lagi masih saya rakit untuk skripsi.</p>
+      <div class="readout">
+        <span><b>20+</b> sistem dibangun</span>
+        <span><b>FastAPI · Flask · Node.js · React</b> sehari-hari</span>
+        <span><b>Railway + PostgreSQL</b> sebagai fondasi deploy</span>
+      </div>
+      <div class="cta-row">
+        <a href="#featured" class="btn primary">Lihat Sistem →</a>
+        <a href="#contact" class="btn ghost">Hubungi Saya</a>
+      </div>
+    </div>
+    <div>
+      <svg class="schematic" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram skematik equipment graph">
+        <line class="edge" x1="210" y1="170" x2="80" y2="70"/>
+        <line class="edge" x1="210" y1="170" x2="340" y2="70"/>
+        <line class="edge" x1="210" y1="170" x2="70" y2="220"/>
+        <line class="edge" x1="210" y1="170" x2="350" y2="230"/>
+        <line class="edge" x1="210" y1="170" x2="150" y2="300"/>
+        <line class="edge" x1="210" y1="170" x2="270" y2="300"/>
+        <line class="edge" x1="80" y1="70" x2="70" y2="220"/>
+        <line class="edge" x1="340" y1="70" x2="350" y2="230"/>
+
+        <circle class="node" cx="80" cy="70" r="26"/>
+        <text x="80" y="74" text-anchor="middle">SAP</text>
+        <circle class="node" cx="340" cy="70" r="26"/>
+        <text x="340" y="74" text-anchor="middle">KPI</text>
+        <circle class="node" cx="70" cy="220" r="26"/>
+        <text x="70" y="224" text-anchor="middle">ICU</text>
+        <circle class="node" cx="350" cy="230" r="26"/>
+        <text x="350" y="234" text-anchor="middle">BOC</text>
+        <circle class="node" cx="150" cy="300" r="24"/>
+        <text x="150" y="304" text-anchor="middle">ATG</text>
+        <circle class="node" cx="270" cy="300" r="24"/>
+        <text x="270" y="304" text-anchor="middle">IW39</text>
+
+        <circle class="node core pulse" cx="210" cy="170" r="38"/>
+        <text class="core-label" x="210" y="167" text-anchor="middle">EQUIPMENT</text>
+        <text class="core-label" x="210" y="179" text-anchor="middle">TAG</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats wrap">
+    <div class="stat-grid">
+      <div class="stat"><div class="num">20+</div><div class="lbl">Sistem dibangun &amp; dideploy</div></div>
+      <div class="stat"><div class="num">26+</div><div class="lbl">Tabel PostgreSQL saling terhubung</div></div>
+      <div class="stat"><div class="num">200K+</div><div class="lbl">Baris data equipment dikelola</div></div>
+      <div class="stat"><div class="num">RU II–VII</div><div class="lbl">Unit kerja refinery terlayani</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured wrap" id="featured">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Sistem Pilihan</span>
+      <h2>Enam sistem yang paling mewakili cara saya bekerja.</h2>
+      <p>Dari AI assistant lintas-modal sampai mesin ledger double-entry — dipilih karena rentang masalah yang ditangani, bukan sekadar yang paling baru.</p>
+    </div>
+    <div class="feat-grid">
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">PTM-013</span>
+          <span class="status"><span class="dot live"></span>Live · Produksi</span>
+        </div>
+        <h3>Data Governance System</h3>
+        <p>Platform data terpusat: katalog dokumen, Equipment 360°, dan asisten AI dengan routing intent RAG / SQL / Graph ke lebih dari 25 modul. pgvector menangani pencarian semantik, Neo4j menyimpan Knowledge Graph relasi antar-equipment.</p>
+        <div class="chips">
+          <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">pgvector</span><span class="chip">Neo4j</span><span class="chip">RAG / LLM</span><span class="chip">Railway</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">PTM-008</span>
+          <span class="status"><span class="dot live"></span>Live · Produksi</span>
+        </div>
+        <h3>keypi Dashboard</h3>
+        <p>Pemantauan KPI Timeliness, Completeness, dan Problem Closure lintas RU II–VII. Modal detail per unit, grafik saldo, filter kategori, dan kartu peringkat — dipakai harian oleh tim reliability.</p>
+        <div class="chips">
+          <span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Chart.js</span><span class="chip">PostgreSQL</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">PTM-009</span>
+          <span class="status"><span class="dot live"></span>Live · Produksi</span>
+        </div>
+        <h3>Agenti SO Masterdata</h3>
+        <p>Visualisasi hierarki equipment berbasis ISO 14224 dalam piramida 7 level. Menelan upload Excel SAP IH08 hingga 76 ribu+ baris tanpa membuat tim data pusing soal mapping manual.</p>
+        <div class="chips">
+          <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Pandas</span><span class="chip">ISO 14224</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">PTM-014</span>
+          <span class="status"><span class="dot live"></span>Live · Produksi</span>
+        </div>
+        <h3>Graph Manager</h3>
+        <p>Sinkronisasi data equipment dari PostgreSQL ke Neo4j Community Edition. Equipment diposisikan sebagai node pusat dengan relasi typed ke tabel monitoring — divisualisasikan via D3.js.</p>
+        <div class="chips">
+          <span class="chip">Flask</span><span class="chip">D3.js</span><span class="chip">Neo4j</span><span class="chip">Railway</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">IND-005</span>
+          <span class="status"><span class="dot dev"></span>Dalam Pengembangan · Skripsi</span>
+        </div>
+        <h3>TasKita</h3>
+        <p>Aplikasi mobile fully-offline untuk usaha retail tas: login berbasis peran, penyimpanan lokal SQLite, dan UI bergaya boutique. Proyek tugas akhir yang sedang saya rampungkan.</p>
+        <div class="chips">
+          <span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">SQLite</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="tag">IND-004</span>
+          <span class="status"><span class="dot dev"></span>Dalam Pengembangan</span>
+        </div>
+        <h3>JIBAS Keuangan (SIMKEU)</h3>
+        <p>Modernisasi sistem keuangan sekolah dengan mesin ledger double-entry terpusat sebagai jantung sistem, dibungkus SPA vanilla JS yang ringan tanpa framework frontend.</p>
+        <div class="chips">
+          <span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Vanilla JS SPA</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- REGISTRY -->
+  <section class="registry wrap" id="registry">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Registry Sistem</span>
+      <h2>Sistem lain yang turut saya bangun &amp; kelola.</h2>
+      <p>Didaftar dengan nomor tag seperti master data equipment — karena begitu juga cara saya mengatur proyek sehari-hari.</p>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Semua</button>
+      <button class="filter-btn" data-filter="ptm">Pertamina Enterprise</button>
+      <button class="filter-btn" data-filter="ind">Personal &amp; Akademik</button>
+    </div>
+
+    <div class="reg-table">
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-001</span>
+        <span class="name">Equipment 360°</span>
+        <span class="desc">FastAPI · Jinja2 — lima tab equipment view, health score engine, tag validation tool.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-002</span>
+        <span class="name">Reliability Performance &amp; Risk Agent</span>
+        <span class="desc">Flask · GPT-4o — monitoring PAF, ICU, Bad Actor, MTBF/MTTR, dan BOC.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-003</span>
+        <span class="name">PPMS</span>
+        <span class="desc">FastAPI · Chart.js — monitoring predictive maintenance, Excel upsert, heatmap kesehatan.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-004</span>
+        <span class="name">Action Audit &amp; Improvement Agent</span>
+        <span class="desc">Dashboard lima panel analisis untuk tindak lanjut audit reliability.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-005</span>
+        <span class="name">SAP Analytics IW29/IW39</span>
+        <span class="desc">Custom Chart Builder untuk notifikasi &amp; work order SAP.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-006</span>
+        <span class="name">DPCDAI WhatsApp Chatbot</span>
+        <span class="desc">Flask · LangChain · Neo4j — chatbot tanya-jawab berbasis graph.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-007</span>
+        <span class="name">KontrakMonitor Mobile</span>
+        <span class="desc">React Native · Expo — autentikasi JWT, navigasi drawer.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-010</span>
+        <span class="name">PRISMA · TA-ex</span>
+        <span class="desc">Manajemen reservasi material SAP, workflow Kertas Kerja, API publik untuk Power BI.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-011</span>
+        <span class="name">Sistem Monitoring Kontrak ME2</span>
+        <span class="desc">React/Vite + C# ASP.NET Core — siklus hidup kontrak, SLA, tahap invoice.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-012</span>
+        <span class="name">Laporan Bot (Telegram + WhatsApp)</span>
+        <span class="desc">Parsing pesan #laporan ke tabel daily_report PostgreSQL via ekstraksi LLM.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ptm">
+        <span class="tagnum">PTM-015</span>
+        <span class="name">ABBYY Cloud OCR</span>
+        <span class="desc">Flask — ekstraksi teks dokumen, dideploy di Railway.</span>
+        <span class="statuscol"><span class="dot live"></span>Live</span>
+      </div>
+      <div class="reg-row" data-cat="ind">
+        <span class="tagnum">IND-001</span>
+        <span class="name">CVPro Builder</span>
+        <span class="desc">Web app pembuat CV, didokumentasikan sebagai kontribusi PKM.</span>
+        <span class="statuscol"><span class="dot doc"></span>Documented</span>
+      </div>
+      <div class="reg-row" data-cat="ind">
+        <span class="tagnum">IND-002</span>
+        <span class="name">Riset Knowledge Graph &amp; Jurnal PKM</span>
+        <span class="desc">Penelitian reliabilitas data knowledge graph, dituangkan dalam dokumen akademik.</span>
+        <span class="statuscol"><span class="dot doc"></span>Published</span>
+      </div>
+      <div class="reg-row" data-cat="ind">
+        <span class="tagnum">IND-003</span>
+        <span class="name">ArdiaMindly</span>
+        <span class="desc">FastAPI · PostgreSQL · Railway — web app mindfulness untuk ibu pascamelahirkan.</span>
+        <span class="statuscol"><span class="dot dev"></span>Prototype</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="stack wrap" id="stack">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Toolbox</span>
+      <h2>Stack yang saya pakai bolak-balik.</h2>
+    </div>
+    <div class="stack-groups">
+      <div class="stack-group reveal">
+        <h4>Backend</h4>
+        <div class="chips"><span class="chip">FastAPI</span><span class="chip">Flask</span><span class="chip">Node.js / Express</span><span class="chip">C# ASP.NET Core</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <h4>Frontend &amp; Mobile</h4>
+        <div class="chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">Vanilla JS SPA</span><span class="chip">React Native / Expo</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <h4>Database &amp; Graph</h4>
+        <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">pgvector</span><span class="chip">Neo4j</span><span class="chip">SQLite</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <h4>AI / LLM</h4>
+        <div class="chips"><span class="chip">RAG</span><span class="chip">Intent Routing (SQL/Graph/RAG)</span><span class="chip">GPT-4o via Dinoiki API</span><span class="chip">LangChain</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <h4>Infrastruktur</h4>
+        <div class="chips"><span class="chip">Railway</span><span class="chip">PostgreSQL hosting</span><span class="chip">CI sederhana</span></div>
+      </div>
+      <div class="stack-group reveal">
+        <h4>Integrasi</h4>
+        <div class="chips"><span class="chip">SAP IW29 / IW39 / IH08</span><span class="chip">Power BI</span><span class="chip">Telegram &amp; WhatsApp Bot</span><span class="chip">ABBYY OCR</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about wrap" id="about">
+    <div class="about-box reveal">
+      <div>
+        <span class="eyebrow">Tentang Saya</span>
+        <p style="margin-top:16px;">Saya Programmer bekerja di lingkup teknis/engineering Pertamina, membangun dan merawat rangkaian aplikasi internal untuk equipment master data, pelacakan procurement, pelaporan maintenance, data governance, dan monitoring operasional — mencakup unit kerja RU II hingga RU VII.</p>
+        <p>Sebagian besar sistem ini berbagi satu database PostgreSQL yang sama, dengan 26+ tabel saling terhubung berdasarkan tag number / equipment, mencakup work order SAP, notifikasi, BOC, ICU, ATG, metering, inspeksi pipeline, dan data master equipment lebih dari 200 ribu baris.</p>
+        <p>Di luar pekerjaan, saya sedang menyelesaikan bereksperimen dengan integrasi AI/LLM, rekayasa data, dan pengembangan lintas web, mobile, hingga graph database.</p>
+      </div>
+      <div class="about-meta">
+        <div class="row"><span>Peran</span><b>Full-Stack Engineer, Reliability &amp; Data Systems</b></div>
+        <div class="row"><span>Institusi</span><b>Pertamina (RU II–VII)</b></div>
+        <div class="row"><span>Status</span><b>Mahasiswa Tingkat Akhir — Skripsi Berjalan</b></div>
+        <div class="row"><span>Bahasa Kode</span><b>Bahasa Indonesia &amp; Inggris</b></div>
+        <div class="row"><span>Domain</span><b>Web · Mobile · AI/LLM · Graph DB</b></div>
+        <div class="row" style="border-bottom:none;"><span>Deploy</span><b>Railway + PostgreSQL</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact wrap" id="contact">
+    <div class="contact-box reveal">
+      <span class="eyebrow" style="justify-content:center;">Hubungi Saya</span>
+      <h2 style="margin-top:16px;">Terbuka untuk peluang baru.</h2>
+      <p>Sedang mencari posisi full-stack / data engineer tempat saya bisa membawa pengalaman membangun sistem reliability skala enterprise ini.</p>
+      <div class="contact-grid">
+        <a class="contact-pill" href="mailto:adnan.buyung01@gmail.com">✉ adnan.buyung01@gmail.com</a>
+        <a class="contact-pill" href="tel:+6285261781320">📞 +6285261781320</a>
+        <a class="contact-pill" href="https://github.com/adnannasution" target="_blank" rel="noopener">⌥ GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Adnan Buyung Nasution — dibangun dengan HTML, CSS &amp; JavaScript murni.</span>
+    <span>TAG: PORTFOLIO-001 · STATUS: LIVE</span>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .card, .reg-row').forEach(el => observer.observe(el));
+
+  // registry filters
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('.reg-row');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      rows.forEach(r => {
+        const show = f === 'all' || r.dataset.cat === f;
+        r.classList.toggle('hidden-row', !show);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
