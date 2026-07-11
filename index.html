@@ -10,18 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#0c1726;
-    --bg-panel:#13243a;
-    --bg-panel-alt:#172b45;
-    --line:#27435f;
-    --line-soft:rgba(94,200,224,.14);
-    --cyan:#5ec8e0;
-    --cyan-dim:#3a8aa3;
-    --amber:#e8a33d;
-    --green:#6fcf97;
-    --slate:#8fa3b8;
-    --text:#eaf1f7;
-    --text-dim:#9fb3c8;
+    --bg-deep:#f5f7fa;
+    --bg-panel:#ffffff;
+    --bg-panel-alt:#eef1f6;
+    --line:#d1d9e6;
+    --line-soft:rgba(37,99,235,.12);
+    --cyan:#2563eb;
+    --cyan-dim:#93c5fd;
+    --amber:#d97706;
+    --green:#16a34a;
+    --slate:#64748b;
+    --text:#0f172a;
+    --text-dim:#475569;
     --font-display:'Space Grotesk',sans-serif;
     --font-body:'Inter',sans-serif;
     --font-mono:'JetBrains Mono',monospace;
@@ -37,7 +37,7 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  ::selection{background:var(--cyan);color:#08121f;}
+  ::selection{background:var(--cyan);color:#ffffff;}
 
   /* blueprint grid backdrop */
   .grid-overlay{
@@ -73,7 +73,7 @@
   /* ---------- header ---------- */
   header{
     position:fixed;top:0;left:0;right:0;z-index:50;
-    background:rgba(12,23,38,.78);
+    background:rgba(245,247,250,.88);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -86,7 +86,7 @@
     width:30px;height:30px;border:1px solid var(--cyan);border-radius:6px;
     display:flex;align-items:center;justify-content:center;
     font-weight:700;font-size:11px;color:var(--cyan);
-    background:linear-gradient(160deg,var(--bg-panel-alt),var(--bg-panel));
+    background:linear-gradient(160deg,var(--bg-panel),var(--bg-panel-alt));
     flex:none;
   }
   .brand b{font-weight:600;letter-spacing:.02em;}
@@ -112,7 +112,7 @@
   }
   .readout{
     font-family:var(--font-mono);font-size:12.5px;color:var(--slate);
-    border:1px solid var(--line);background:rgba(19,36,58,.6);
+    border:1px solid var(--line);background:rgba(238,241,246,.7);
     border-radius:8px;padding:12px 16px;display:inline-flex;flex-wrap:wrap;gap:10px 18px;
     margin-bottom:30px;
   }
@@ -123,15 +123,15 @@
     padding:12px 22px;border-radius:6px;border:1px solid var(--line);
     transition:all .18s ease;
   }
-  .btn.primary{background:var(--cyan);color:#08121f;border-color:var(--cyan);font-weight:600;}
-  .btn.primary:hover{background:#7fd6ea;}
+  .btn.primary{background:var(--cyan);color:#ffffff;border-color:var(--cyan);font-weight:600;}
+  .btn.primary:hover{background:#1d4ed8;}
   .btn.ghost{color:var(--text);}
   .btn.ghost:hover{border-color:var(--cyan);color:var(--cyan);}
 
   /* hero schematic svg */
   .schematic{width:100%;height:auto;}
-  .schematic .node{fill:var(--bg-panel-alt);stroke:var(--cyan-dim);stroke-width:1.4;}
-  .schematic .node.core{fill:var(--bg-panel-alt);stroke:var(--cyan);stroke-width:1.8;}
+  .schematic .node{fill:var(--bg-panel);stroke:var(--cyan-dim);stroke-width:1.4;}
+  .schematic .node.core{fill:var(--bg-panel);stroke:var(--cyan);stroke-width:1.8;}
   .schematic .edge{stroke:var(--line);stroke-width:1.2;}
   .schematic text{font-family:var(--font-mono);fill:var(--text-dim);font-size:9px;letter-spacing:.04em;}
   .schematic .core-label{fill:var(--cyan);font-size:9.5px;}
